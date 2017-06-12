@@ -1,0 +1,39 @@
+<div>
+    <div class="row">
+        <div class="col-lg-offset-2 col-lg-8">
+            <div class="btn-group" role="group">
+            	<a href="#/pet" class="btn btn-default">Add pet to store</a>
+            	<div class="col-lg-6 has-error">
+					<span class="help-block" ng-show="(errorMessage!='')">{{errorMessage}}</span>
+				</div>
+            </div>
+
+            <!-- Display pets in a table -->
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th class="col-lg-1">Photo</th>
+                    <th>Pet Name</th>
+                    <th>Category</th>
+                    <th>Status</th>
+                    <th style="width: 90px"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="pet in pets | orderBy: '-id'">
+                    <td>{{pet.id}}</td>
+                    <td><img ng-src="{{pet.photoUrls[0]}}"  class="img-responsive" alt="{{pet.photoUrls[0] ? pet.photoUrls[0] : ''}}"></td>
+                    <td><a href="#/pet/{{pet.id}}">{{pet.name}}</a></td>
+                    <td>{{pet.category.name}}</td>
+                    <td>{{pet.status | capitalize}}</td>
+                    <td>
+                        <input type="button" class="btn btn-danger" ng-click="deletePet(pet.id)" value="Remove from store"/>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>

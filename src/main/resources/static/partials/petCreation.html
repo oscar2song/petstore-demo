@@ -1,0 +1,79 @@
+<div>
+	<div class="row">
+		<div class="col-lg-offset-2 col-lg-8">
+			<div class="row">
+				<div class="col-lg-2 btn-group vcenter" role="group">
+					<a href="#/" class="btn btn-default">Return to pet list</a>
+				</div><!--  
+				--><div class="col-lg-4 vcenter text-info" ng-if="loading">
+					<strong>Currently trying to add a new pet to the store...</strong>
+				</div><!--  
+				--><div class="col-lg-4 vcenter text-success" ng-if="isNewPetCreated">
+					<strong>A new pet has just been added to the store</strong>
+				</div>
+			</div>
+			<form ng-submit="submit()" role="form" class="form-horizontal"
+				name="petCreationForm" novalidate>
+				<div class="form-group"
+					ng-class="{'has-error': (isPetNameWrong && petCreationForm.petName.$error.required)}">
+					<label class="control-label col-lg-2" for="petName">Name:</label>
+					<div class="col-lg-4">
+						<input type="text" id="petName" name="petName"
+							class="form-control" ng-model="petName"
+							placeholder="Enter a pet name" required>
+					</div>
+					<div class="col-lg-3">
+						<span class="help-block"
+							ng-show="(isPetNameWrong && petCreationForm.petName.$error.required)">Please
+							enter a pet name</span>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-lg-2" for="petCategory">Category:</label>
+					<div class="col-lg-4">
+						<input type="text" id="petCategory" class="form-control"
+							ng-model="petCategory" placeholder="Enter a category">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-lg-2" for="petPhotoUrls">Photo
+						urls:</label>
+					<div class="col-lg-4">
+						<input type="text" id="petPhotoUrls" class="form-control"
+							ng-model="petPhotoUrls"
+							placeholder="e.g. img/dog1.jpg;img/dog5.jpg">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-lg-2" for="petTags">Tags:</label>
+					<div class="col-lg-4">
+						<input type="text" id="petTags" class="form-control"
+							ng-model="petTags" placeholder="Enter tags separated by ;">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-lg-2" for="petStatus">Status:</label>
+					<div class="col-lg-4">
+						<select id="petStatus" class="form-control" ng-model="petStatus">
+							<option value="available">Available</option>
+							<option value="pending">Pending</option>
+							<option value="sold">Sold</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-lg-offset-2 col-lg-4">
+						<input type="submit" value="Add pet to store"
+							class="btn btn-primary"> 
+						<input type="reset"
+							class="btn btn-default">
+					</div>
+					<div class="col-lg-6 has-error">
+						<span class="help-block" ng-show="(errorMessage!='')">{{errorMessage}}</span>
+					</div>
+				</div>
+			</form>
+
+		</div>
+	</div>
+</div>
