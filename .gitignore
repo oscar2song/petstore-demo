@@ -1,1 +1,7 @@
-/target/
+/bin
+.metadata
+/gen
+*~
+/target
+/dev
+\.jsfdia$
