@@ -11,5 +11,7 @@ public interface PetService {
 
 	Collection<Pet> delete(int petId);
 
+  Collection<Pet> getAll();
+  
   Collection<Pet> getAll(String query);
 }

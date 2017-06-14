@@ -28,9 +28,8 @@ public class PetController {
   }
 
   @RequestMapping(value = "/pets", method = RequestMethod.GET)
-  public Collection<Pet> getPets(String query) {
-    Collection<Pet> all = petService.getAll(query);
-    return all;
+  public Collection<Pet> getPets() {
+    return petService.getAll();
   }
 
   @RequestMapping(value = "/pet/{petId}", method = RequestMethod.GET)
@@ -41,8 +40,11 @@ public class PetController {
   @RequestMapping(value = "/pet", method = RequestMethod.POST)
   public ResponseEntity<?> createPet(@RequestBody Pet pet) {
     Pet newPet = petService.create(pet);
+
     HttpHeaders httpHeaders = new HttpHeaders();
-    httpHeaders.setLocation(ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newPet.getId()).toUri());
+    httpHeaders.setLocation(
+        ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newPet.getId()).toUri());
+
     return new ResponseEntity<>(newPet, httpHeaders, HttpStatus.CREATED);
   }
 
@@ -50,4 +52,5 @@ public class PetController {
   public Collection<Pet> deletePet(@PathVariable int petId) {
     return petService.delete(petId);
   }
+
 }

@@ -2,7 +2,7 @@ petStoreModule.factory('PetPathFactory', function(){
 	return {
 		addPetPath: function(){ return '/petstore/pet';},
 		getPetPath: function(id){ return '/petstore/pet/' + id;},
-		getPetsPath: function(query){ return '/petstore/pets';},
+		getPetsPath: function(){ return '/petstore/pets';},
 		deletePetPath: function(id){ return '/petstore/pet/' + id;}
 	};
 });
@@ -45,10 +45,10 @@ petStoreModule.factory('PetFactory', ['$http', '$q', 'PetPathFactory', function(
 			return deferred.promise;
 		},
 		
-		getPets: function(query) {
-			var url = PetPathFactory.getPetsPath() + "?query="+query;
+		getPets: function() {
+			var url = PetPathFactory.getPetsPath();
 			
-			var deferred = $q.defer();			
+			var deferred = $q.defer();
 			
 			$http.get(url).then(function(response) {
 					factory.pets = response.data;
