@@ -30,8 +30,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	public void configure(WebSecurity web) throws Exception {
 		web.ignoring()
-				.antMatchers("/js/**")
-				.antMatchers("/img/**")
+    .antMatchers("/*.js")
+    .antMatchers("/*.css")
+        .antMatchers("/js/**")
+ 				.antMatchers("/img/**")
 				.antMatchers("/css/**")
 				.antMatchers("/partials/**");
 	}
@@ -43,7 +45,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 				.authorizeRequests()
 
-				.antMatchers("/", "/login", "/index.html", "/user").permitAll()
+				.antMatchers("/", "/login", "/#/login","/index.html", "/user").permitAll()
 
 				.antMatchers(HttpMethod.GET, "/petstore/**").hasAuthority(Permission.READ.getAuthority())
 				.antMatchers(HttpMethod.POST, "/petstore/**").hasAuthority(Permission.CREATE.getAuthority())
