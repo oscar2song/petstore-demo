@@ -1,4 +1,4 @@
-petStoreModule.controller('PetsController', ['$scope', 'PetFactory', 'allpets', function($scope, PetFactory, allpets) {
+petStoreModule.controller('PetsController', ['$scope', 'PetFactory', 'allpets','$location',function($scope, PetFactory, allpets,$location,authService) {
 	
 	$scope.pets = allpets;
 	
@@ -14,6 +14,24 @@ petStoreModule.controller('PetsController', ['$scope', 'PetFactory', 'allpets', 
 			console.log(msg);
 		});
 	}
+	
+	$scope.logout = function () {
+		$location.path('/login');
+	};
+
+	$scope.hasPermission = function (permission) {
+		console.log("current user:"+authService.currentUser())
+		if (!authService.currentUser()) {
+			return false;
+		}
+
+		return authService.currentUser().authorities.indexOf(permission) > -1;
+	};
+
+	$scope.signedIn = function () {
+		return authService.currentUser();
+	}
+	
 }]);
 
 

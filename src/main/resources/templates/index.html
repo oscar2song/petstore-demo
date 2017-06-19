@@ -13,24 +13,28 @@
     <script type="text/javascript" src="/static/angular-route.min.js" th:src="@{/angular-route.min.js}"></script>
     
     <script type="text/javascript" src="/static/js/petStoreApp.js" th:src="@{/js/petStoreApp.js}"></script>
+	<script type="text/javascript" src="/static/js/services/loginController.js" th:src="@{/js/controllers/loginController.js}"></script>
+    <script type="text/javascript" src="/static/js/services/authService.js" th:src="@{/js/services/authService.js}"></script>
     <script type="text/javascript" src="/static/js/filters/petFilter.js" th:src="@{/js/filters/petFilter.js}"></script>
     <script type="text/javascript" src="/static/js/services/petFactory.js" th:src="@{/js/services/petFactory.js}"></script>
     <script type="text/javascript" src="/static/js/controllers/petController.js" th:src="@{/js/controllers/petController.js}"></script>
+	<script type="text/javascript" src="/static/js/services/appController.js" th:src="@{/js/controllers/appController.js}"></script>
 </head>
 <body ng-app="petStoreApp" >
-	<header>
+<div ng-controller="AppController">
+     <header>
 	    <nav class="navbar navbar-default">
 	        <div class="container-fluid">
 	            <div class="navbar-header">
-	                <a class="navbar-brand" href="#">Pet Store</a>
+	                <a class="navbar-brand" href="/">Pet Store</a>
 	            </div>
 	            <p class="navbar-text navbar-right" th:text="'Signed in as ' + ${username}" style="margin-right: 10px;">Signed in as Anonymous</p>
 	        </div>
 	    </nav>
-	</header>
-	
+	  </header>
+
 	<div ng-view=""></div>
-	
+</div>	
 	<footer class="footer">
 	    <div class="container">
 	        <p th:text="${#dates.format(datetime, 'dd MMM yyyy HH:mm')}"  class="text-muted">Page was rendered today.</p>

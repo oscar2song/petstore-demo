@@ -2,9 +2,6 @@ package oscar.demo.petstore;
 
 import org.springframework.security.core.GrantedAuthority;
 
-/**
- * @author WaleedK
- */
 public enum Permission implements GrantedAuthority {
 	CREATE,
 	READ,
