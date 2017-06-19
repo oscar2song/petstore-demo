@@ -15,6 +15,9 @@ petStoreModule.config(['$routeProvider', function($routeProvider) {
 		templateUrl: 'partials/pet.html', 
 		controller: 'PetController', 
 		resolve: { pet: getPet }
+	}).when('/login', {
+		templateUrl: 'partials/login.html',
+		controller: 'LoginController',
 	})
 	.otherwise({redirectTo: '/'});
 }]);

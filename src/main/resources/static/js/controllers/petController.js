@@ -1,4 +1,4 @@
-petStoreModule.controller('PetsController', ['$scope', 'PetFactory', 'allpets','$location',function($scope, PetFactory, allpets,$location,authService) {
+petStoreModule.controller('PetsController', ['$scope', 'PetFactory', 'allpets','$location','authService' ,function($scope, PetFactory, allpets,$location,authService) {
 	
 	$scope.pets = allpets;
 	
@@ -20,11 +20,11 @@ petStoreModule.controller('PetsController', ['$scope', 'PetFactory', 'allpets','
 	};
 
 	$scope.hasPermission = function (permission) {
-		console.log("current user:"+authService.currentUser())
 		if (!authService.currentUser()) {
 			return false;
 		}
-
+		console.log("input:"+permission);
+		console.log("search:"+authService.currentUser().authorities.indexOf(permission));
 		return authService.currentUser().authorities.indexOf(permission) > -1;
 	};
 
@@ -130,3 +130,46 @@ petStoreModule.controller('PetController', ['$scope', '$window', 'PetFactory', '
 		});
 	}
 }]);
+
+
+petStoreModule.controller('LoginController', function ($scope, $location, authService, $http, $rootScope) {
+	$scope.dataLoading = false;
+
+	$scope.login = function () {
+		$scope.dataLoading = true;
+
+		authService.login($scope.credentials)
+			.then(function (data) {
+				if (data.authenticated) {
+					$location.path("/");
+					$scope.error = false;
+				} else {
+					$location.path("/login");
+					$scope.error = true;
+				}
+
+				$scope.dataLoading = false;
+			}, function () {
+				$location.path("/login");
+				$scope.error = true;
+
+				$scope.dataLoading = false;
+			});
+	};
+});
+
+petStoreModule.controller('AppController', function ($scope, $q, authService, $location, $rootScope) {
+
+	$rootScope.$on("$routeChangeStart", function (event, next) {
+		if (next.originalPath == '/login') {
+			authService.resetUser();
+			return;
+		}
+
+		if (!authService.currentUser() || !authService.currentUser().authenticated) {
+			authService.resetUser();
+			$location.url('/login');
+		}
+	});
+});
+

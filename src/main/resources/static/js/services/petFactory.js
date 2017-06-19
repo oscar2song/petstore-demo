@@ -79,9 +79,9 @@ petStoreModule.factory('PetFactory', ['$http', '$q', 'PetPathFactory', function(
 
 
 
-petStoreModule.factory('authService', ['$http', '$q',  'PetPathFactory', function ($http, $q) {
+petStoreModule.factory('authService', ['$http', '$q', function ($http, $q) {
 	var currUser;
-
+    
 	return {
 		login: function (credentials) {
 			var fd = new FormData();
@@ -98,15 +98,15 @@ petStoreModule.factory('authService', ['$http', '$q',  'PetPathFactory', functio
 			}).then(function (response) {
 				if (response.data.name !== null) {
 					currUser = response.data;
-				}
+				}	
 				deferred.resolve(currUser);
 			}, function () {
-				deferred.resolve(null);
+				deferred.resolve(null);				
 			});
-
 			return deferred.promise;
 		},
 		currentUser: function () {
+			console.log("currUser3:"+currUser);
 			return currUser;
 		},
 		resetUser: function () {
