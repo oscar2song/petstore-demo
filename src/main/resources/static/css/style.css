@@ -25,3 +25,14 @@ img
 	height: 200px;
 	overflow-y: scroll;
 }
+
+#outer
+{
+    width:100%;
+    text-align: center;
+}
+
+.inner
+{
+    display: inline-block;
+}

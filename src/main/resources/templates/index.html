@@ -25,17 +25,18 @@
 	            <div class="navbar-header">
 	                <a class="navbar-brand" href="#">Pet Store</a>
 	            </div>
-	            <p class="navbar-text navbar-right" th:text="'Signed in as ' + ${username}" style="margin-right: 10px;">Signed in as Anonymous</p>
-	        </div>
+<!-- 	            <p class="navbar-text navbar-right" th:text="'Signed in as ' + ${username}" style="margin-right: 10px;">Signed in as Anonymous</p>
+ -->	        </div>
 	    </nav>
 	  </header>
 
 	<div ng-view=""></div>
-</div>	
+
 	<footer class="footer">
 	    <div class="container">
 	        <p th:text="${#dates.format(datetime, 'dd MMM yyyy HH:mm')}"  class="text-muted">Page was rendered today.</p>
 	    </div>
 	</footer>
+</div>	
 </body>
 </html>

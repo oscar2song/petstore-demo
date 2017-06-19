@@ -2,6 +2,8 @@ package oscar.demo.petstore.controller;
 
 import java.util.Date;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
@@ -19,7 +21,7 @@ public class ViewController {
 	}
 
 	@RequestMapping("/")
-	public String index(Model model) {
+	public String index(Model model, HttpServletRequest request) {
 		model.addAttribute("datetime", new Date());
 		model.addAttribute("username", "Oscar Song");
 		model.addAttribute("mode", appMode);
